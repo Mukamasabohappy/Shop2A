@@ -1,0 +1,243 @@
+/* Container for the full screen */
+.coffee-login-container {
+    display: flex;
+    height: 100vh; /* Full height */
+    width: 100vw;  /* Full width */
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Form section with a light background */
+.form-section {
+    flex: 1;
+    padding: 40px;
+    background-color: #f9f4f0; /* Light beige background */
+    color: #444; /* Dark gray text color */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow to separate form from image */
+}
+
+/* Image section with a coffee image */
+.image-section {
+    flex: 1;
+    background-image: url('https://mir-s3-cdn-cf.behance.net/project_modules/fs/801c75165402919.64070b1c19a36.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(70%); /* Darken image slightly */
+}
+
+/* Logo at the top of the form */
+.logo {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #8bc34a;
+}
+
+/* Heading styling */
+.form-section h2 {
+    font-size: 2.5em;
+    font-weight: 600; /* Bold weight for better readability */
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Description text styling */
+.form-section p {
+    font-size: 1.1em;
+    color: #777;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Styling for each form group (label + input) */
+.form-group {
+    margin-bottom: 25px; /* Increased margin for spacing */
+    width: 100%;
+    text-align: left;
+}
+
+/* Label styling */
+.form-group label {
+    display: block;
+    margin-bottom: 10px; /* Increased margin */
+    font-weight: 600;
+    color: #333;
+}
+
+/* Input field styling */
+.form-group input {
+    width: 100%;
+    padding: 15px; /* Increased padding for larger input fields */
+    border: none;
+    border-radius: 5px; /* Slightly rounded corners */
+    font-size: 1.1em; /* Increased font size for better readability */
+    color: #444;
+    background-color: #fff;
+    border: 2px solid #ddd; /* Light gray border */
+    transition: border-color 0.3s ease;
+}
+
+/* Input focus styling */
+.form-group input:focus {
+    outline: none;
+    border-color: #8bc34a; /* Green border on focus */
+}
+
+/* Sign-up button styling */
+.signup-button {
+    background-color: #8bc34a; /* Green button */
+    color: white;
+    padding: 15px 25px; /* Larger padding for a bigger button */
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em; /* Larger font size */
+    cursor: pointer;
+    width: 50%; /* Increased width */
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin-top: 20px; /* Added top margin for spacing */
+}
+
+/* Hover effect for sign-up button */
+.signup-button:hover {
+    background-color: #689f38; /* Darker green on hover */
+}
+
+/* Login button styling */
+.login-button {
+    background-color: #8bc34a; /* Green button */
+    color: white;
+    padding: 15px 25px; /* Larger padding for a bigger button */
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em; /* Larger font size */
+    cursor: pointer;
+    width: 50%; /* Increased width */
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin-top: 10px; /* Spacing between login and sign-up buttons */
+}
+
+/* Hover effect for login button */
+.login-button:hover {
+    background-color: #689f38; 
+}
+
+/* Terms & conditions text at the bottom */
+.terms-text {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #777;
+    text-align: center;
+}
+
+/* Link styling for terms */
+.terms-text a {
+    color: #8bc34a;
+    text-decoration: none;
+}
+
+/* Hover effect for terms link */
+.terms-text a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .coffee-login-container {
+    flex-direction: column;
+  }
+
+  .form-section, .image-section {
+    flex: 1 0 100%; /* Stack the sections on top of each other */
+  }
+
+  .logo {
+    font-size: 2em; /* Slightly smaller logo */
+    margin-bottom: 10px;
+  }
+
+  .form-section h2 {
+    font-size: 2em; /* Adjust heading size */
+  }
+
+  .form-group input {
+    font-size: 1em; /* Slightly smaller input font */
+  }
+
+  .signup-button, .login-button {
+    width: 80%; /* Make buttons take more width */
+    font-size: 1.1em; /* Slightly smaller button text */
+    padding: 12px 22px; /* Adjust button padding */
+  }
+
+  .terms-text {
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .coffee-login-container {
+    flex-direction: column;
+  }
+
+  .form-section, .image-section {
+    flex: 1 0 100%; /* Stack the sections */
+  }
+
+  .logo {
+    font-size: 1.8em;
+  }
+
+  .form-section h2 {
+    font-size: 1.8em;
+  }
+
+  .form-group input {
+    font-size: 1em;
+  }
+
+  .signup-button, .login-button {
+    width: 85%; /* Make buttons wider on smaller screens */
+    font-size: 1.1em;
+  }
+
+  .terms-text {
+    font-size: 0.75em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .coffee-login-container {
+    flex-direction: column;
+  }
+
+  .form-section, .image-section {
+    flex: 1 0 100%; /* Stack the sections */
+  }
+
+  .logo {
+    font-size: 1.6em;
+  }
+
+  .form-section h2 {
+    font-size: 1.6em;
+  }
+
+  .form-group input {
+    font-size: 1em;
+  }
+
+  .signup-button, .login-button {
+    width: 90%; /* Maximize button width */
+    font-size: 1em;
+    padding: 10px 20px; /* Adjust button padding */
+  }
+
+  .terms-text {
+    font-size: 0.7em;
+  }
+}

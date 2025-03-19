@@ -1,0 +1,399 @@
+.mens-clothing-container {
+  font-family: sans-serif;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  min-height: 100vh; /* Make the container take up the full viewport height */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align items from top */
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.header .cart-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Modal styles */
+.cart-modal, .checkout-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.cart-modal-content, .checkout-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+}
+
+.cart-modal .close-button, .checkout-modal .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select,
+.form-group input[type="tel"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  height: 100px;
+}
+
+.checkout-modal button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Existing Cart Styles */
+.cart {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.cart h3 {
+  margin-top: 0;
+}
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart li {
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart li button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.quantity-selector label {
+  margin-right: 5px;
+}
+
+.quantity-selector input {
+  width: 50px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  text-align: center;
+}
+
+/* Checkout Modal */
+.checkout-modal h4 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 1.1em;
+}
+
+.checkout-modal ul {
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.checkout-modal ul li {
+  list-style-type: disc;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkout-modal img {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.clothing-grid {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(280px, 1fr)); /* Auto-fill grid */
+  gap: 40px;
+  justify-content: center;
+  width: 100%;
+}
+
+.clothing-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
+  transition: transform 0.2s ease-in-out;
+}
+
+.clothing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.clothing-card img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.quick-view-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.image-container:hover .quick-view-button {
+  opacity: 1;
+}
+
+/* Hide the image on Hover */
+
+.clothing-card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.clothing-card .price {
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 8px;
+}
+
+.clothing-card .description {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.size-options {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  justify-content: center;
+}
+
+.size-button {
+  padding: 8px 12px;
+  border: 1px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.size-button:hover,
+.size-button.selected {
+  background-color: #007bff;
+  color: white;
+}
+
+.add-to-cart-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 30%;
+}
+
+.add-to-cart-button:hover {
+  background-color: #218838;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 30px;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  font-size: 1.2rem;
+  margin-top: 30px;
+}
+
+/* Quick View Modal Styles */
+.quick-view-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100; /* Ensure on top */
+}
+
+.quick-view-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: left;
+  max-width: 800px;
+  position: relative; /* For close button positioning */
+}
+
+.quick-view-content img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #888;
+  background: none;
+  border: none;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .clothing-grid {
+    grid-template-columns: repeat(3, minmax(200px, 1fr)); /* Auto-fill grid */
+  }
+
+  .quick-view-button,
+  .size-button,
+  .add-to-cart-button {
+    font-size: 0.85rem;
+  }
+
+  .clothing-card img {
+    max-height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .clothing-grid {
+    grid-template-columns: 1fr; /* Single column on small screens */
+  }
+
+  .quick-view-content {
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .clothing-card img {
+    max-height: 220px;
+  }
+
+  .size-options {
+    gap: 6px;
+  }
+
+  .size-button {
+    font-size: 0.75rem;
+    padding: 6px 10px;
+  }
+
+  .add-to-cart-button {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+}

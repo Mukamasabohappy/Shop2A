@@ -1,0 +1,122 @@
+/* Updated full-screen settings container with larger content */
+.settings-container {
+  padding: 40px;  /* Increased padding for a more spacious container */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100rem;  /* Full width */
+  height: 100vh; /* Full height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; /* Spread the content */
+  margin-left: 20rem;
+  margin-top: -70rem;
+}
+
+.settings-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;  /* Increased margin for more space */
+  font-size: 2.5em;  /* Increased font size */
+}
+
+.settings-section {
+  margin-bottom: 30px;  /* Increased margin */
+  padding: 20px;  /* Increased padding for larger section */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: #f9f9f9;
+}
+
+.settings-section h3 {
+  margin-bottom: 15px;  /* Increased margin */
+  color: #444;
+  font-size: 1.6em;  /* Increased font size */
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-label {
+  font-weight: bold;
+  margin-bottom: 10px;  /* Increased margin */
+  font-size: 1.2em;  /* Larger font size for labels */
+}
+
+.settings-input,
+.settings-select {
+  width: 100%;
+  padding: 15px;  /* Increased padding for inputs/selects */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.2em;  /* Increased font size */
+  background: #fff;
+}
+
+.settings-select {
+  cursor: pointer;
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;  /* Increased margin for spacing */
+}
+
+.settings-button {
+  padding: 15px 20px;  /* Larger padding */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2em;  /* Increased font size */
+  transition: background 0.3s;
+}
+
+.save-button {
+  background: #3498db;
+  color: white;
+}
+
+.save-button:hover {
+  background: #2980b9;
+}
+
+.cancel-button {
+  background: #ccc;
+  margin-right: 15px;  /* Increased margin */
+}
+
+.cancel-button:hover {
+  background: #b3b3b3;
+}
+
+/* Responsive adjustments for mobile screens */
+@media (max-width: 600px) {
+  .settings-container {
+      margin: 0;  /* Remove any margins for full screen */
+      width: 100%;
+      padding: 20px;  /* Adjust padding for mobile */
+  }
+
+  .settings-title {
+      font-size: 2em;  /* Decreased font size for mobile */
+  }
+
+  .settings-section h3 {
+      font-size: 1.4em;  
+  }
+
+  .settings-label {
+      font-size: 1.1em;  
+  }
+
+  .settings-input,
+  .settings-select {
+      font-size: 1.1em;  
+  }
+
+  .settings-button {
+      font-size: 1.1em;
+  }
+}

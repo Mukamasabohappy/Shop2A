@@ -1,0 +1,161 @@
+/* General Styles */
+.dashboard-container {
+  max-width: 2030px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left: 20rem;
+  width: 200vw;
+  margin-top: -60rem;
+  margin-bottom: 40rem;
+}
+
+
+/* Header */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.date-range-selector label {
+  margin-right: 10px;
+}
+
+/* KPI Section */
+.kpi-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.kpi-card {
+  
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.kpi-card h2 {
+  font-size: 18px;
+  margin: 0 0 10px 0;
+}
+
+.kpi-value {
+  font-size: 28px;
+  font-weight: bold;
+  display: block;
+}
+
+.kpi-trend {
+  font-size: 14px;
+  color: #777;
+}
+
+.kpi-trend.up {
+  color: green;
+}
+
+.kpi-trend.down {
+  color: red;
+}
+
+/* Chart Section */
+.chart-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.chart-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container h2 {
+  font-size: 18px;
+  margin: 0 0 10px 0;
+}
+
+.chart {
+  /* Define sizes to make it visible */
+  min-height: 200px;
+  width: 100%;
+  /* Adjust as needed */
+}
+
+/* Table Section */
+.table-section {
+  margin-top: 20px;
+}
+
+.table-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.table-container h2 {
+  font-size: 18px;
+  margin: 0 0 10px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #eee;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .kpi-section,
+  .chart-section {
+    grid-template-columns: 1fr; /* Stack on smaller screens */
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .date-range-selector {
+    margin-top: 10px;
+  }
+}
+
+/* Example Color Theme (Adjust to your brand) */
+:root {
+  --primary-color: #007bff; /* Blue */
+  --secondary-color: #6c757d; /* Gray */
+}
+
+.dashboard-header h1 {
+  color: var(--primary-color);
+}
+
+.kpi-trend.up {
+  color: var(--primary-color);
+}

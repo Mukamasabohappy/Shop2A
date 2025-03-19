@@ -1,0 +1,152 @@
+/* Home.css */
+.home-container {
+  width: 100%;
+  text-align: center;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden;
+}
+
+.hero img {
+  width: 100%; /* Make sure the image is fully responsive */
+  height: 100%; /* Ensure the image covers full height */
+  object-fit: cover;
+  object-position: center center;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%; /* Optional: Control the width for better readability */
+  max-width: 600px; /* Optional: Limit maximum width */
+}
+
+.featured-products {
+  padding: 50px 20px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.cart {
+  background: #08a04d;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.cart:hover {
+  background: #0a9c33;
+}
+
+/* Add responsiveness */
+
+@media (max-width: 768px) {
+  .hero {
+    height: 50vh; /* Reduce height of hero section on smaller screens */
+  }
+
+  .text-overlay {
+    width: 90%; /* Increase width for better readability */
+    padding: 15px; /* Reduce padding on smaller screens */
+  }
+
+  .product-grid {
+    gap: 15px; /* Reduce gap between product cards */
+  }
+
+  .product-card {
+    padding: 12px; /* Reduce padding inside product cards */
+  }
+
+  .cart {
+    padding: 8px; /* Adjust button padding */
+    font-size: 1rem; /* Adjust font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 40vh; /* Further reduce height of hero section */
+  }
+
+  .text-overlay {
+    width: 95%; /* Increase width for even better readability */
+    padding: 10px; /* Reduce padding */
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr; /* Stack product cards vertically on small screens */
+    gap: 10px; /* Further reduce gap between product cards */
+  }
+
+  .product-card {
+    padding: 10px; /* Further reduce padding inside product cards */
+  }
+
+  .cart {
+    width: 100%; /* Make the cart button full-width */
+    padding: 12px; /* Adjust padding */
+    font-size: 1.1rem; /* Adjust font size */
+  }
+}
+
+@media (max-width: 320px) {
+  .hero {
+    height: 30vh; /* Further reduce hero section height on very small screens */
+  }
+
+  .text-overlay {
+    width: 95%; /* Keep the text overlay width at 95% */
+    font-size: 0.9em; /* Adjust text size for very small screens */
+    padding: 8px; /* Adjust padding */
+  }
+
+  .product-card {
+    padding: 8px; /* Further reduce padding inside product cards */
+  }
+
+  .cart {
+    width: 100%; /* Ensure the cart button is still full-width */
+    padding: 10px; /* Adjust padding */
+    font-size: 1rem; /* Adjust font size */
+  }
+}
