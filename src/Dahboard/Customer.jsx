@@ -1,109 +1,104 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../Dahboard/DashStyle/Customer.module.css'; // Create Customers.module.css
-import axios from 'axios';
+import "../Dahboard/DashStyle/Customer.css";
 
-const Customers = () => {
-    const [customersData, setCustomersData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
-    const [sortColumn, setSortColumn] = useState('id'); // Default sorting
-    const [sortOrder, setSortOrder] = useState('asc'); // Default sorting order
+function Customers() {
+  const [customers, setCustomers] = useState([]);
+  const [newCustomer, setNewCustomer] = useState({ name: '', email: '', password: '' });
+  const [editCustomer, setEditCustomer] = useState(null);
 
-    // useEffect(() => {
-    //     const fetchCustomers = async () => {
-    //         setLoading(true); // Start loading
-    //         setError(null);  // Clear any previous errors
-    //         try {
-    //             const response = await axios.get('http://localhost:5000/api/customers'); // Replace with your API endpoint
-    //             setCustomersData(response.data);
-    //         } catch (err) {
-    //             console.error("Error fetching customers:", err);
-    //             setError("Failed to load customer data. Please try again later.");
-    //         } finally {
-    //             setLoading(false); // End loading
-    //         }
-    //     };
+  // Fetch customers from API
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/customers/all');
+        const data = await response.json();
+        setCustomers(data);
+      } catch (error) {
+        console.error('Error fetching customers:', error);
+      }
+    };
+    fetchCustomers();
+  }, []);
 
-    //     fetchCustomers();
-    // }, []);
-
-    // const handleSearch = (e) => {
-    //     setSearchTerm(e.target.value);
-    // };
-
-    // const handleSort = (column) => {
-    //     if (sortColumn === column) {
-    //         // Toggle sort order if clicking the same column
-    //         setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
-    //     } else {
-    //         // Set new column and default to ascending order
-    //         setSortColumn(column);
-    //         setSortOrder('asc');
-    //     }
-    // };
-
-    // Filtered and Sorted Customers
-    const filteredCustomers = customersData.filter(customer =>
-        customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        customer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        customer.location.toLowerCase().includes(searchTerm.toLowerCase())
-    ).sort((a, b) => {
-        let comparison = 0;
-        if (a[sortColumn] > b[sortColumn]) {
-            comparison = 1;
-        } else if (a[sortColumn] < b[sortColumn]) {
-            comparison = -1;
-        }
-        return sortOrder === 'asc' ? comparison : comparison * -1;
-    });
-
-
-    if (loading) {
-        return <div className={styles.loading}>Loading customer data...</div>;
+  const handleAddCustomer = async () => {
+    if (newCustomer.name && newCustomer.email && newCustomer.password) {
+      try {
+        const response = await fetch('http://localhost:5000/api/customers/add', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newCustomer)
+        });
+        const addedCustomer = await response.json();
+        setCustomers([...customers, addedCustomer]);
+        setNewCustomer({ name: '', email: '', password: '' });
+      } catch (error) {
+        console.error('Error adding customer:', error);
+      }
     }
+  };
 
-    if (error) {
-        return <div className={styles.error}>{error}</div>;
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:5000/api/customers/delete/${id}`, { method: 'DELETE' });
+      setCustomers(customers.filter(customer => customer.id !== id));
+    } catch (error) {
+      console.error('Error deleting customer:', error);
     }
+  };
 
-    return (
-        <div className={styles.customersContainer}>
-            <h2>Customer List</h2>
+  const handleEdit = (customer) => setEditCustomer({ ...customer });
 
-            <div className={styles.searchBar}>
-                <input
-                    type="text"
-                    placeholder="Search customers..."
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
-            </div>
+  const handleUpdateCustomer = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/customers/update/${editCustomer.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editCustomer)
+      });
+      const updatedCustomer = await response.json();
+      setCustomers(customers.map(customer => (customer.id === updatedCustomer.id ? updatedCustomer : customer)));
+      setEditCustomer(null);
+    } catch (error) {
+      console.error('Error updating customer:', error);
+    }
+  };
 
-            <table className={styles.customersTable}>
-                <thead>
-                    <tr>
-                        <th onClick={() => handleSort('id')}>ID</th>
-                        <th onClick={() => handleSort('name')}>Name</th>
-                        <th onClick={() => handleSort('email')}>Email</th>
-                        <th onClick={() => handleSort('orders')}>Orders</th>
-                        <th onClick={() => handleSort('location')}>Location</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredCustomers.map(customer => (
-                        <tr key={customer.id}>
-                            <td data-label="ID">{customer.id}</td>
-                            <td data-label="Name">{customer.name}</td>
-                            <td data-label="Email">{customer.email}</td>
-                            <td data-label="Orders">{customer.orders}</td>
-                            <td data-label="Location">{customer.location}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-    );
-};
+  return (
+    <div className="customers-container">
+      <h2>Customers</h2>
+      <table className="customers-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {customers.map(customer => (
+            <tr key={customer.id}>
+              <td>{customer.name}</td>
+              <td>{customer.email}</td>
+              <td>
+                <button onClick={() => handleEdit(customer)}>Edit</button>
+                <button onClick={() => handleDelete(customer.id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <h3>{editCustomer ? 'Edit Customer' : 'Add New Customer'}</h3>
+      <input type="text" placeholder="Name" value={editCustomer ? editCustomer.name : newCustomer.name} onChange={e => editCustomer ? setEditCustomer({ ...editCustomer, name: e.target.value }) : setNewCustomer({ ...newCustomer, name: e.target.value })} />
+      <input type="email" placeholder="Email" value={editCustomer ? editCustomer.email : newCustomer.email} onChange={e => editCustomer ? setEditCustomer({ ...editCustomer, email: e.target.value }) : setNewCustomer({ ...newCustomer, email: e.target.value })} />
+      <input type="password" placeholder="Password" value={editCustomer ? editCustomer.password : newCustomer.password} onChange={e => editCustomer ? setEditCustomer({ ...editCustomer, password: e.target.value }) : setNewCustomer({ ...newCustomer, password: e.target.value })} />
+      {editCustomer ? (
+        <button onClick={handleUpdateCustomer}>Update</button>
+      ) : (
+        <button onClick={handleAddCustomer}>Add</button>
+      )}
+    </div>
+  );
+}
 
 export default Customers;

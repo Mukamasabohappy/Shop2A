@@ -1,96 +1,94 @@
-
+/* Sidebar Base Styles */
 .dashboard-sidebar {
-    width: 250px;
-    background-color: #1e2124;
-    color: #fff;
-    padding: 20px;
-    height: 100vh; 
-    overflow-y: auto; 
-    position: sticky; 
-    top: 0; 
-    padding-top: 10rem;
-  }
-  
-  /* Logo Styles */
-  .sidebar-logo {
-    margin-bottom: 30px;
-    text-align: center;
-    
-  }
-  
-  .sidebar-logo-image {
-    max-width: 50px; /* Set the logo width to a smaller value, adjust as needed */
-    height: auto;    /* Maintain aspect ratio */
-    margin-top: 10px; /* Adjust margin to ensure it's properly placed */
+  width: 250px;
+  background-color: #1e2124;
+  color: #fff;
+  padding: 20px;
+  height: 100vh;  /* Ensure the sidebar height is always full screen */
+  position: fixed;  /* Make sure sidebar stays fixed on screen */
+  top: 0;  /* Align with the top of the viewport */
+  left: 0;
+  overflow-y: auto;  /* Make sidebar scrollable if content overflows */
 }
 
-  
-  /* Navigation List Styles */
-  .sidebar-nav-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+/* Logo Styles */
+.sidebar-logo {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidebar-logo-image {
+  max-width: 50px;
+  height: auto;
+  margin-top: 10px;
+}
+
+/* Navigation List Styles */
+.sidebar-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-nav-item {
+  margin-bottom: 10px;
+}
+
+.sidebar-nav-link {
+  display: block;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: #eee;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  align-items: center;  /* Center icon and text */
+}
+
+.sidebar-nav-link:hover,
+.sidebar-nav-link.active {
+  background-color: #495057;  /* Slightly lighter background on hover and active */
+  color: #fff;
+}
+
+.sidebar-nav-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  width: 20px;
+  text-align: center;
+}
+
+/* Active Class Styles */
+.sidebar-nav-link.active {
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    position: static; /* Remove sticky positioning on small screens */
+    width: 100%;  /* Make sidebar take full width on mobile */
+    height: auto;  /* Let it adjust based on content */
+    padding: 10px;
   }
-  
-  .sidebar-nav-item {
+
+  .sidebar-logo {
     margin-bottom: 10px;
   }
-  
-  .sidebar-nav-link {
-    display: block;
-    padding: 12px 15px;
-    text-decoration: none;
-    color: #eee;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+
+  .sidebar-nav-list {
     display: flex;
-    align-items: center; /* Vertically center icon and text */
+    overflow-x: auto;  /* Enable horizontal scrolling for nav items */
+    white-space: nowrap;  /* Prevent wrapping of items */
   }
-  
-  .sidebar-nav-link:hover,
-  .sidebar-nav-link.active {
-    background-color: #495057; /* Slightly lighter background on hover and active */
-    color: #fff;
-  }
-  
-  .sidebar-nav-icon {
+
+  .sidebar-nav-item {
     margin-right: 10px;
-    font-size: 1.2rem;
-    width: 20px; /* Ensure consistent icon size */
-    text-align: center; /* Center the icon within its allocated space */
+    margin-bottom: 0;
   }
-  
-  /* Active Class Styles (for React Router NavLink) */
-  .sidebar-nav-link.active {
-    font-weight: bold;
+
+  .sidebar-nav-link {
+    padding: 8px 10px;
+    font-size: 0.9rem;
   }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .dashboard-sidebar {
-      width: 100%; /* Take full width on smaller screens */
-      height: auto; /* Adjust height */
-      position: static; /* Remove sticky positioning */
-      padding: 10px;
-    }
-  
-    .sidebar-logo {
-      margin-bottom: 10px;
-    }
-  
-    .sidebar-nav-list {
-      display: flex;
-      overflow-x: auto; /* Enable horizontal scrolling */
-      white-space: nowrap; /* Prevent links from wrapping */
-    }
-  
-    .sidebar-nav-item {
-      margin-right: 10px;
-      margin-bottom: 0;
-    }
-  
-    .sidebar-nav-link {
-      padding: 8px 10px;
-      font-size: 0.9rem;
-    }
-  }
+}

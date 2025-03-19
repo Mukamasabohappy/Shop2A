@@ -6,11 +6,12 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 100rem;
-  height: 100vh; /* Make the container full height of the screen */
+  height: 93vh; /* Make the container full height of the screen */
   display: flex;
   flex-direction: column;
   justify-content: space-around; /* Adjust layout to fill space */
-  margin-left: 20rem;margin-top: -70rem;
+  margin-left: 20rem;
+  margin-top: 100px;
 }
 
 .analyticsContainer h2 {

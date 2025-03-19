@@ -1,9 +1,11 @@
 /* General Orders Styles */
 .orders-container {
     padding: 20px;
-    margin-left: 20rem;
-    margin-top: -40rem;
-    margin-bottom: 80rem;
+    margin-left: 0; /* Removed excessive left margin */
+    margin-top: 200px; /* Adjusted top margin to ensure it stays on screen */
+    margin-bottom: 40px; /* Reduced bottom margin */
+    width: 100%; /* Ensure it fills the available width */
+    box-sizing: border-box; /* Prevent padding from affecting the overall width */
 }
 
 .orders-title {
@@ -82,5 +84,13 @@
         display: block;
         overflow-x: auto; /* Enable horizontal scrolling */
         white-space: nowrap; /* Prevent table cells from wrapping */
+    }
+
+    .orders-container {
+        padding: 15px; /* Reduced padding for smaller screens */
+    }
+
+    .orders-title {
+        font-size: 1.5rem; /* Adjust title font size for smaller screens */
     }
 }

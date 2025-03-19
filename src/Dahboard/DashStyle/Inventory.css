@@ -1,19 +1,19 @@
 /* General Styles */
 .inventory-container {
   padding: 2rem; /* Adjust padding for proper spacing */
-  
   width: 100%; /* Ensure it fills the container */
-  max-width: 93%; /* Allow it to expand fully */
-  margin-left: 18rem;
-  margin-top: -65rem;
-  margin-bottom: 30rem;
-
-justify-content: space-around;
+  max-width: 100%; /* Allow it to expand fully */
+  margin-left: 18rem; /* Keep a moderate left margin for layout */
+  margin-top: 8rem; /* Adjusted to a more appropriate value */
+  margin-bottom: 2rem; /* Adjusted bottom margin */
+  margin-right: 2rem; /* Adjusted right margin */
+  box-sizing: border-box; /* Ensure padding doesn't add to width */
 }
 
+/* Inventory Toolbar Styles */
 .inventory-toolbar {
   display: flex;
-gap: 0;
+  gap: 1rem; /* Add spacing between items */
   align-items: center;
   margin-bottom: 20px;
 }
@@ -23,7 +23,7 @@ gap: 0;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
-  width: 250px; /* Set a fixed width for the search bar */
+  width: 250px; /* Fixed width for search bar */
 }
 
 .inventory-add-button {
@@ -84,4 +84,36 @@ gap: 0;
 
 .inventory-delete-button:hover {
   background-color: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .inventory-container {
+    margin-left: 0; /* Remove left margin for smaller screens */
+    margin-top: 1rem; /* Adjust top margin */
+    margin-bottom: 2rem; /* Adjust bottom margin */
+    margin-right: 1rem; /* Adjust right margin */
+  }
+
+  .inventory-search {
+    width: 100%; /* Make search bar responsive */
+  }
+
+  .inventory-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .inventory-container {
+    margin-left: 0; /* Remove left margin */
+    margin-top: 1rem; /* Adjust for smaller screens */
+    margin-bottom: 1rem; /* Reduced bottom margin */
+    margin-right: 1rem; /* Adjust right margin */
+  }
+
+  .inventory-search {
+    width: 100%; /* Full width on smaller screens */
+  }
 }

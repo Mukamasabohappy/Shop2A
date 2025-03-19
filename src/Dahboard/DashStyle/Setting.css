@@ -4,12 +4,13 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100rem;  /* Full width */
-  height: 100vh; /* Full height */
+  height: 90vh; /* Full height */
   display: flex;
   flex-direction: column;
   justify-content: space-around; /* Spread the content */
   margin-left: 20rem;
-  margin-top: -70rem;
+  margin-top: 100px;
+ 
 }
 
 .settings-title {
