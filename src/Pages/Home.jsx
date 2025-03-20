@@ -90,7 +90,7 @@ const Home = () => {
   return (
     <div className="home-containers">
      <div class="hero">
-    <img src=" https://img.freepik.com/free-photo/interior-clothing-store-with-stylish-merchandise-racks-fashionable-brand-design-casual-wear-modern-boutique-empty-fashion-showroom-shopping-centre-with-elegant-merchandise_482257-65537.jpg?t=st=1741932661~exp=1741936261~hmac=f8355a0643f1d41f92ff7340d62ec4a1c40c18c51735ed936a7aef24d76d1d90&w=1800" alt="Clothing Store Background"/>
+    <img src="https://www.traverse-blog.com/wp-content/uploads/2019/09/Vintage-Clothing-Shop-Pilsen-Neighborhood-Chicago-2.jpg" alt="Clothing Store Background"/>
     <div class="text-overlay">
         <h1>Welcome to Our Clothing Store!</h1>
         <p>Discover the latest trends and styles.</p>
@@ -98,7 +98,7 @@ const Home = () => {
           </div>
       
       <section className="featured-products">
-        <h2>Featured Products</h2>
+        <h1 className="word">Featured Products</h1>
         <div className="product-grid">
           {products.map((product) => (
             <div 

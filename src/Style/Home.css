@@ -9,7 +9,7 @@
 .hero {
   position: relative;
   width: 100%;
-  height: 100vh; /* Full viewport height */
+  height: 100vh; 
   overflow: hidden;
 }
 
@@ -18,6 +18,8 @@
   height: 100%; /* Ensure the image covers full height */
   object-fit: cover;
   object-position: center center;
+opacity: 100px;
+  background-color: black;
 }
 
 .text-overlay {
@@ -27,7 +29,6 @@
   transform: translate(-50%, -50%);
   color: white;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
   width: 80%; /* Optional: Control the width for better readability */
@@ -37,10 +38,9 @@
 .featured-products {
   padding: 50px 20px;
 }
-
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
   gap: 20px;
   max-width: 1200px;
   margin: 0 auto;

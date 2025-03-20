@@ -1,119 +1,195 @@
 /* General Styles */
 .inventory-container {
-  padding: 2rem; /* Adjust padding for proper spacing */
-  width: 100%; /* Ensure it fills the container */
-  max-width: 100%; /* Allow it to expand fully */
-  margin-left: 18rem; /* Keep a moderate left margin for layout */
-  margin-top: 8rem; /* Adjusted to a more appropriate value */
-  margin-bottom: 2rem; /* Adjusted bottom margin */
-  margin-right: 2rem; /* Adjusted right margin */
-  box-sizing: border-box; /* Ensure padding doesn't add to width */
+  padding: 20px;
+  width: 100vw; /* Full width of the viewport */
+  height: 100vh; /* Full height of the viewport */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 0; /* Remove left margin */
+  margin-top: 10rem; /* Adjust the top margin as per your needs */
+  overflow-y: hidden; /* Remove vertical scrolling */
+  padding-left: 20rem;
+}
+
+/* Inventory Form */
+.inventory-form {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.inventory-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.inventory-add-button, .inventory-update-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #27ae60;
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.inventory-add-button:hover, .inventory-update-button:hover {
+  background: #219653;
 }
 
 /* Inventory Toolbar Styles */
 .inventory-toolbar {
   display: flex;
-  gap: 1rem; /* Add spacing between items */
+  gap: 1rem;
   align-items: center;
+  justify-content: center;
+  width: 100%;
   margin-bottom: 20px;
 }
 
 .inventory-search {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 2px solid #3498db;
   border-radius: 5px;
   font-size: 1rem;
-  width: 250px; /* Fixed width for search bar */
+  width: 300px; /* Slightly wider for better usability */
+  transition: all 0.3s ease;
 }
 
+.inventory-search:focus {
+  outline: none;
+  border-color: #2c81ba;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Add Button */
 .inventory-add-button {
-  background-color: #27ae60; /* Green color */
-  color: #fff;
+  background: linear-gradient(45deg, #27ae60, #2ecc71);
+  color: white;
   border: none;
   padding: 12px 20px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 1.1rem;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
 }
 
 .inventory-add-button:hover {
-  background-color: #219653;
+  background: linear-gradient(45deg, #219653, #1e8449);
 }
 
 /* Table Styles */
+.inventory-table-container {
+  width: 100%; /* Ensure the table takes up full available width */
+  max-width: 100%;
+  overflow-x: auto; /* Allow horizontal scrolling for small screens, but remove vertical scroll */
+  flex-grow: 1; /* Allow it to fill available space */
+}
+
 .inventory-table {
-  width: 100%; /* Make sure the table fills the container */
+  width: 100%;
   border-collapse: collapse;
-  table-layout: fixed; /* Ensure content doesn't overflow */
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .inventory-table th,
 .inventory-table td {
-  padding: 12px 15px;
+  padding: 14px 18px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  word-wrap: break-word; /* Handle long text properly */
+  word-wrap: break-word;
 }
 
 .inventory-table th {
-  background-color: #f0f0f0;
+  background: #2c3e50;
+  color: white;
   font-weight: bold;
 }
 
-.inventory-edit-button,
-.inventory-delete-button {
-  background-color: #3498db; /* Blue color */
+.inventory-table tbody tr:hover {
+  background: rgba(52, 152, 219, 0.1);
+}
+
+/* Buttons */
+.inventory-edit-button {
+  background: linear-gradient(45deg, #3498db, #2980b9);
   color: #fff;
   border: none;
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: background-color 0.3s;
-  margin-right: 5px; /* Space between buttons */
+  transition: all 0.3s ease;
 }
 
 .inventory-edit-button:hover {
-  background-color: #2980b9;
+  background: linear-gradient(45deg, #2980b9, #1f618d);
 }
 
 .inventory-delete-button {
-  background-color: #e74c3c; /* Red color */
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
 }
 
 .inventory-delete-button:hover {
-  background-color: #c0392b;
+  background: linear-gradient(45deg, #c0392b, #a93226);
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .inventory-container {
-    margin-left: 0; /* Remove left margin for smaller screens */
-    margin-top: 1rem; /* Adjust top margin */
-    margin-bottom: 2rem; /* Adjust bottom margin */
-    margin-right: 1rem; /* Adjust right margin */
+  .inventory-toolbar {
+    flex-direction: column;
+    align-items: center;
   }
 
   .inventory-search {
-    width: 100%; /* Make search bar responsive */
+    width: 100%;
+    max-width: 400px;
   }
 
-  .inventory-toolbar {
-    flex-direction: column;
-    align-items: flex-start;
+  .inventory-table-container {
+    width: 100%;
+    overflow-x: auto; /* Ensure table can scroll horizontally on small screens */
   }
 }
 
 @media (max-width: 768px) {
   .inventory-container {
-    margin-left: 0; /* Remove left margin */
-    margin-top: 1rem; /* Adjust for smaller screens */
-    margin-bottom: 1rem; /* Reduced bottom margin */
-    margin-right: 1rem; /* Adjust right margin */
+    padding: 1rem;
+  }
+
+  .inventory-toolbar {
+    flex-direction: column;
+    align-items: center;
   }
 
   .inventory-search {
-    width: 100%; /* Full width on smaller screens */
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .inventory-table-container {
+    width: 100%;
   }
 }
