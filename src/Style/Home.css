@@ -18,8 +18,9 @@
   height: 100%; /* Ensure the image covers full height */
   object-fit: cover;
   object-position: center center;
-opacity: 100px;
-  background-color: black;
+opacity: 300%;
+  background-color:black;
+  color: black;
 }
 
 .text-overlay {
