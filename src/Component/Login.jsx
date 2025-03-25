@@ -77,12 +77,10 @@ const CoffeeLogin = () => {
                 </div>
 
                 <div className="signup-section">
-                    <p>Don't have an account?</p>
-                    <Link to="/signup"> {/* Link to signup page */}
-                        <button className="signup-button">
-                            Sign Up
-                        </button>
-                    </Link>
+                    <p>Don't have an account?      <Link to="/signup">
+                        Sign Up
+                    </Link></p>
+                    
                 </div>
             </div>
 

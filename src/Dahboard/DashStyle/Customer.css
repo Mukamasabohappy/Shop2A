@@ -45,7 +45,215 @@ h2 {
   .customers-container {
     padding: 10px;
   }
+/* Main container styling */
+.analytics-container {
+  background-color: #f9fafb;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
 
+.analytics-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Header and metric cards */
+header h1 {
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+/* Customer metrics cards */
+.grid-cols-1 > div {
+  transition: all 0.2s ease-in-out;
+  border: 1px solid #e5e7eb;
+}
+
+.grid-cols-1 > div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Segment buttons */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+  border-radius: 4px;
+}
+
+button.whitespace-nowrap {
+  transition: all 0.2s ease;
+}
+
+button.whitespace-nowrap:not(.bg-blue-600):hover {
+  background-color: #f3f4f6;
+}
+
+/* Search and filter section */
+input.block {
+  transition: border-color 0.2s ease;
+}
+
+input.block:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.filter-dropdown {
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Customer table styling */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th {
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  background-color: #f9fafb;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+  background-color: #f3f4f6 !important;
+}
+
+.rounded-full {
+  transition: all 0.2s ease;
+}
+
+/* Status badges */
+.bg-green-100 {
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.bg-gray-100 {
+  border: 1px solid rgba(156, 163, 175, 0.2);
+}
+
+/* Loyalty tier badges */
+.bg-purple-100 {
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.bg-yellow-100 {
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.bg-amber-100 {
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+/* Action buttons */
+button.text-blue-600, button.text-gray-500 {
+  transition: transform 0.15s ease;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+button.text-blue-600:hover, button.text-gray-500:hover {
+  transform: scale(1.15);
+  background-color: #f3f4f6;
+}
+
+/* Pagination */
+.sm\:flex-1 button {
+  transition: all 0.15s ease;
+}
+
+.sm\:flex-1 button:hover:not(.text-blue-600) {
+  background-color: #f3f4f6;
+}
+
+/* Button hover effects */
+button.bg-blue-600 {
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+button.bg-blue-600:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+button.bg-white {
+  transition: all 0.15s ease;
+}
+
+button.bg-white:hover {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .analytics-container {
+    padding: 1rem;
+  }
+  
+  .px-6 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+/* Animation for filter dropdown */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Add this class to your filter dropdown */
+.absolute.right-0.mt-2 {
+  animation: slideDown 0.2s ease-out;
+}
+
+/* Loading state styling if needed */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.loading-spinner {
+  border: 3px solid rgba(59, 130, 246, 0.2);
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
   .customers-table th, .customers-table td {
     padding: 8px;
     font-size: 14px;

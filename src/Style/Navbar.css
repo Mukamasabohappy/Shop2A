@@ -1,11 +1,12 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   background: black;
   color: white;
   padding: 15px 20px;
   width: 2500px;
+  padding-right: 20rem;
+  justify-content: space-between;
 }
 
 .logo a {
@@ -18,7 +19,9 @@
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 20%;
+  justify-content: space-around;
+ left: 100%;
 }
 
 .nav-links li {
@@ -38,14 +41,8 @@
   border-radius: 5px;
 }
 
-.cart-btn {
-  background: red;
-  padding: 10px;
-  border-radius: 5px;
-}
-
 .login-btn {
-  background: blue;
+  background: green;
   padding: 10px;
   border-radius: 5px;
 }

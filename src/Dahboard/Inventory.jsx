@@ -23,12 +23,18 @@ function Inventory() {
     }
   };
 
-  // Add New Item (Real-Time Update in Table & Database)
-  const handleAddItem = async () => {
+  // Add New Item (Optimistic UI Update)
+  const handleAddItem = async (event) => {
+    event.preventDefault();  // Prevent form from submitting and refreshing page
+
     if (!newItem.name || !newItem.price) {
       alert("Name and price are required!");
       return;
     }
+
+    // Optimistic Update: add item immediately to UI before sending request
+    const tempItem = { ...newItem, _id: Date.now() }; // fake _id for the item
+    setInventory((prevInventory) => [...prevInventory, tempItem]);
 
     try {
       const response = await fetch("http://localhost:5000/api/clothes/add", {
@@ -38,67 +44,79 @@ function Inventory() {
       });
 
       if (!response.ok) throw new Error("Failed to add item");
+
       const addedItem = await response.json();
-
-      // Optimistically add the new item to the inventory table without re-fetching
-      setInventory((prevInventory) => [...prevInventory, addedItem]);
-
-      // Clear form after adding
+      setInventory((prevInventory) =>
+        prevInventory.map((item) => (item._id === tempItem._id ? addedItem : item))
+      );
       setNewItem({ name: "", description: "", price: "" });
     } catch (error) {
       console.error("Error adding item:", error);
+      // Optionally, remove the item from UI if add fails
+      setInventory((prevInventory) => prevInventory.filter((item) => item._id !== tempItem._id));
     }
   };
 
-  // Delete Item (Real-Time Update in Table & Database)
+  // Delete Item (Optimistic UI Update)
   const handleDeleteItem = async (id) => {
-    console.log("Deleting item with ID:", id); // Debug log for deleting
+    // Optimistic Update: remove item from UI immediately
+    setInventory((prevInventory) => prevInventory.filter((item) => item._id !== id));
+
     try {
-      const response = await fetch(`http://localhost:5000/api/clothes/delete/id`, {
+      const response = await fetch(`http://localhost:5000/api/clothes/delete/${id}`, {
         method: "DELETE",
       });
 
       if (!response.ok) throw new Error("Failed to delete item");
-
-      // Optimistically update inventory state by removing the deleted item
-      setInventory((prevInventory) => prevInventory.filter(item => item.id !== id));
     } catch (error) {
       console.error("Error deleting item:", error);
+      // Optionally, re-add the deleted item to UI if delete fails
+      fetchInventory(); // Re-fetch the entire inventory if deletion fails
     }
   };
 
-  // Update Item (Real-Time Update in Table & Database)
-  const handleUpdateItem = async () => {
+  // Update Item (Optimistic UI Update)
+  const handleUpdateItem = async (event) => {
+    event.preventDefault();
+
     if (!updateItem.name || !updateItem.price) {
       alert("Name and price are required!");
       return;
     }
 
-    console.log("Updating item with ID:", updateItem.id); // Debug log for updating
+    // Optimistic Update: immediately update the item in UI
+    setInventory((prevInventory) =>
+      prevInventory.map((item) =>
+        item._id === updateItem._id ? { ...item, ...updateItem } : item
+      )
+    );
+
     try {
-      const response = await fetch(`http://localhost:5000/api/clothes/update/id`, {
+      const response = await fetch(`http://localhost:5000/api/clothes/update/${updateItem._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateItem),
       });
 
       if (!response.ok) throw new Error("Failed to update item");
-      const updatedItem = await response.json();
 
-      // Replace the old item with the updated item in the inventory state
+      const updatedItem = await response.json();
       setInventory((prevInventory) =>
-        prevInventory.map((item) => (item.id === updatedItem.id ? updatedItem : item))
+        prevInventory.map((item) => (item._id === updatedItem._id ? updatedItem : item))
       );
-      setUpdateItem(null); // Clear update form
+      setUpdateItem(null);
     } catch (error) {
       console.error("Error updating item:", error);
+      // Optionally, re-fetch inventory if update fails
+      fetchInventory();
     }
   };
 
-  // Search functionality
-  const filteredInventory = inventory.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.description.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter inventory for search functionality
+  const filteredInventory = inventory.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -130,13 +148,23 @@ function Inventory() {
           <tbody>
             {filteredInventory.length > 0 ? (
               filteredInventory.map((item) => (
-                <tr key={item.id}>
+                <tr key={item._id}>
                   <td>{item.name}</td>
                   <td>{item.description}</td>
                   <td>${item.price}</td>
                   <td>
-                    <button onClick={() => setUpdateItem(item)}>Update</button>
-                    <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
+                    <button
+                      className="inventory-edit-button"
+                      onClick={() => setUpdateItem(item)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className="inventory-delete-button"
+                      onClick={() => handleDeleteItem(item._id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))
@@ -150,7 +178,7 @@ function Inventory() {
       </div>
 
       {/* Add New Item Form */}
-      <div className="inventory-form">
+      <form className="inventory-form" onSubmit={handleAddItem}>
         <h3>Add New Item</h3>
         <input
           type="text"
@@ -170,14 +198,14 @@ function Inventory() {
           value={newItem.price}
           onChange={(e) => setNewItem({ ...newItem, price: e.target.value })}
         />
-        <button className="inventory-add-button" onClick={handleAddItem}>
+        <button className="inventory-add-button" type="submit">
           Add
         </button>
-      </div>
+      </form>
 
       {/* Update Item Form */}
       {updateItem && (
-        <div className="inventory-form">
+        <form className="inventory-form" onSubmit={handleUpdateItem}>
           <h3>Update Item</h3>
           <input
             type="text"
@@ -194,10 +222,10 @@ function Inventory() {
             value={updateItem.price}
             onChange={(e) => setUpdateItem({ ...updateItem, price: e.target.value })}
           />
-          <button className="inventory-add-button" onClick={handleUpdateItem}>
+          <button className="inventory-add-button" type="submit">
             Update
           </button>
-        </div>
+        </form>
       )}
     </div>
   );

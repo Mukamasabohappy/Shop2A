@@ -1,123 +1,369 @@
-/* Updated full-screen settings container with larger content */
+
+/* Main container */
 .settings-container {
-  padding: 40px;  /* Increased padding for a more spacious container */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100rem;  /* Full width */
-  height: 90vh; /* Full height */
+  max-width: 2048px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 10rem;
+  width: 80vw;
+  height: 50px;
+}
+
+/* Header styles */
+.settings-header {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around; /* Spread the content */
-  margin-left: 20rem;
-  margin-top: 100px;
- 
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-.settings-title {
-  text-align: center;
-  color: #333;
-  margin-bottom: 30px;  /* Increased margin for more space */
-  font-size: 2.5em;  /* Increased font size */
+.settings-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-left: 0.5rem;
 }
 
+/* Tab navigation */
+.settings-tabs {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  width: 100%;
+}
+
+.settings-tabs::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+.tab-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  margin-right: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #6b7280;
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tab-button:hover {
+  color: #4b5563;
+}
+
+.tab-button.active {
+  color: #2563eb;
+  border-bottom: 2px solid #2563eb;
+}
+
+.tab-button svg {
+  margin-right: 0.5rem;
+}
+
+/* Content sections */
 .settings-section {
-  margin-bottom: 30px;  /* Increased margin */
-  padding: 20px;  /* Increased padding for larger section */
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background: #f9f9f9;
+  margin-bottom: 2rem;
 }
 
 .settings-section h3 {
-  margin-bottom: 15px;  /* Increased margin */
-  color: #444;
-  font-size: 1.6em;  /* Increased font size */
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 1rem;
 }
 
-.settings-form {
+/* Option cards and controls */
+.option-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.option-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 100px;
+  flex: 1;
+}
+
+.option-card:hover {
+  border-color: #d1d5db;
+  background-color: #f9fafb;
+}
+
+.option-card.selected {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+.option-card svg {
+  height: 2rem;
+  width: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.option-card span {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Toggle options */
+.toggle-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.toggle-option-text {
   display: flex;
   flex-direction: column;
 }
 
-.settings-label {
-  font-weight: bold;
-  margin-bottom: 10px;  /* Increased margin */
-  font-size: 1.2em;  /* Larger font size for labels */
+.toggle-option-text p:first-child {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
 }
 
-.settings-input,
-.settings-select {
+.toggle-option-text p:last-child {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Toggle switch styling */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d1d5db;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #2563eb;
+}
+
+input:focus + .toggle-slider {
+  box-shadow: 0 0 1px #2563eb;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+/* Select dropdown styling */
+.select-wrapper {
+  position: relative;
   width: 100%;
-  padding: 15px;  /* Increased padding for inputs/selects */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1.2em;  /* Increased font size */
-  background: #fff;
 }
 
-.settings-select {
+.select-dropdown {
+  appearance: none;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background-color: white;
+  font-size: 0.875rem;
+  color: #1f2937;
   cursor: pointer;
 }
 
-.settings-actions {
+.select-wrapper:after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #6b7280;
+  pointer-events: none;
+}
+
+/* Timeframe buttons */
+.timeframe-buttons {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;  /* Increased margin for spacing */
+  gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
-.settings-button {
-  padding: 15px 20px;  /* Larger padding */
-  border: none;
-  border-radius: 5px;
+.timeframe-button {
+  padding: 0.625rem 1rem;
+  background-color: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  color: #4b5563;
+  font-weight: 500;
+  font-size: 0.875rem;
   cursor: pointer;
-  font-size: 1.2em;  /* Increased font size */
-  transition: background 0.3s;
+  transition: all 0.2s;
+  flex: 1;
+  text-align: center;
+  min-width: 100px;
 }
 
-.save-button {
-  background: #3498db;
+.timeframe-button:hover {
+  background-color: #e5e7eb;
+}
+
+.timeframe-button.active {
+  background-color: #2563eb;
+  border-color: #2563eb;
   color: white;
 }
 
+/* Save button */
+.save-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.save-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
 .save-button:hover {
-  background: #2980b9;
+  background-color: #1d4ed8;
 }
 
-.cancel-button {
-  background: #ccc;
-  margin-right: 15px;  /* Increased margin */
+.save-button svg {
+  margin-right: 0.5rem;
 }
 
-.cancel-button:hover {
-  background: #b3b3b3;
+/* Notification toast */
+.toast-notification {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: #ecfdf5;
+  border: 1px solid #d1fae5;
+  color: #065f46;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  animation: slideIn 0.3s ease-out forwards;
+  z-index: 50;
 }
 
-/* Responsive adjustments for mobile screens */
-@media (max-width: 600px) {
-  .settings-container {
-      margin: 0;  /* Remove any margins for full screen */
-      width: 100%;
-      padding: 20px;  /* Adjust padding for mobile */
-  }
+.toast-notification svg {
+  margin-right: 0.5rem;
+}
 
-  .settings-title {
-      font-size: 2em;  /* Decreased font size for mobile */
+@keyframes slideIn {
+  from {
+    transform: translateY(1rem);
+    opacity: 0;
   }
-
-  .settings-section h3 {
-      font-size: 1.4em;  
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
+}
 
-  .settings-label {
-      font-size: 1.1em;  
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .option-cards {
+    flex-direction: column;
   }
-
-  .settings-input,
-  .settings-select {
-      font-size: 1.1em;  
+  
+  .option-card {
+    width: 100%;
   }
+  
+  .timeframe-buttons {
+    flex-direction: column;
+  }
+  
+  .timeframe-button {
+    width: 100%;
+  }
+  
+  .toggle-option {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .toggle-switch {
+    margin-top: 1rem;
+  }
+}
 
-  .settings-button {
-      font-size: 1.1em;
+/* Animations for smoother transitions */
+.tab-content {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

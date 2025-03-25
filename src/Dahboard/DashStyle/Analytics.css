@@ -1,0 +1,285 @@
+.analytics-container {
+  max-width: 100%;
+  margin: 20rem;
+  padding: 1.5rem 2rem;
+  background-color: #f9fafb;
+  min-height: 100vh;
+  margin-top: 10rem;
+}
+
+.analytics-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Header styles with horizontal layout */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1rem;
+}
+
+header h1 {
+  margin-bottom: 0;
+  color: #1f2937;
+  flex: 1;
+}
+
+header .flex {
+  display: flex;
+  gap: 1rem;
+}
+
+/* KPI cards - horizontal row */
+.grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+  scrollbar-width: thin;
+}
+
+.grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 > div {
+  min-width: 220px;
+  flex: 1;
+}
+
+/* Ensure scrollbars look nice */
+.grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4::-webkit-scrollbar {
+  height: 6px;
+}
+
+.grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 3px;
+}
+
+/* Chart section - horizontal arrangement */
+.grid.grid-cols-1.lg\:grid-cols-2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.grid.grid-cols-1.lg\:grid-cols-2 > div {
+  flex: 1;
+  min-width: 400px;
+}
+
+/* Card styles with better shadows */
+.bg-white {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bg-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Button styles */
+button {
+  transition: all 0.2s;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button.bg-blue-600 {
+  background-color: #2563eb;
+}
+
+button.bg-gray-200 {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+/* Table styles - horizontal scrolling for mobile */
+.overflow-x-auto {
+  overflow-x: auto;
+  margin: 0 -1rem;
+  padding: 0 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 1rem;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f3f4f6;
+  white-space: nowrap;
+}
+
+tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Make the product name column fixed width but allow text wrapping */
+tr td:first-child {
+  max-width: 200px;
+  white-space: normal;
+}
+
+/* Strategy cards in horizontal row */
+.space-y-4 {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.space-y-4 > div {
+  min-width: 280px;
+  flex: 1;
+  margin: 0 !important; /* Override any space-y margins */
+}
+
+.border-l-4 {
+  border-left-width: 4px;
+  border-left-style: solid;
+  border-radius: 0.375rem;
+}
+
+.bg-blue-50 {
+  background-color: #eff6ff;
+}
+
+.bg-green-50 {
+  background-color: #ecfdf5;
+}
+
+.bg-purple-50 {
+  background-color: #f5f3ff;
+}
+
+.border-blue-500 {
+  border-color: #3b82f6;
+}
+
+.border-green-500 {
+  border-color: #10b981;
+}
+
+
+.border-purple-500 {
+  border-color: #8b5cf6;
+}
+
+/* Status indicators */
+.rounded-full {
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.bg-green-100 {
+  background-color: #d1fae5;
+}
+
+.text-green-800 {
+  color: #065f46;
+}
+
+.bg-red-100 {
+  background-color: #fee2e2;
+}
+
+.text-red-800 {
+  color: #991b1b;
+}
+
+.bg-blue-100 {
+  background-color: #dbeafe;
+}
+
+.text-blue-800 {
+  color: #1e40af;
+}
+
+/* Icon colors */
+.text-blue-500 {
+  color: #3b82f6;
+}
+
+.text-green-500 {
+  color: #10b981;
+}
+
+.text-purple-500 {
+  color: #8b5cf6;
+}
+
+.text-orange-500 {
+  color: #f97316;
+}
+
+/* Responsive adjustments - prioritizing horizontal layouts */
+@media (max-width: 1024px) {
+  .analytics-container {
+    padding: 1rem;
+  }
+  
+  .grid.grid-cols-1.lg\:grid-cols-2 > div {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  header .flex {
+    margin-top: 1rem;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 > div {
+    min-width: 180px;
+  }
+  
+  .space-y-4 > div {
+    min-width: 220px;
+  }
+}
+
+/* Chart responsiveness */
+.recharts-responsive-container {
+  min-height: 300px;
+}
+
+

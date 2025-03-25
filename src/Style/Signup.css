@@ -83,12 +83,12 @@
 /* Input focus styling */
 .form-group input:focus {
     outline: none;
-    border-color: #8bc34a; /* Green border on focus */
+    border-color: green; /* Green border on focus */
 }
 
 /* Sign-up button styling */
 .signup-button {
-    background-color: #8bc34a; /* Green button */
+    background-color: green; /* Green button */
     color: white;
     padding: 15px 25px; /* Larger padding for a bigger button */
     border: none;
@@ -103,12 +103,12 @@
 
 /* Hover effect for sign-up button */
 .signup-button:hover {
-    background-color: #689f38; /* Darker green on hover */
+    background-color: green; /* Darker green on hover */
 }
 
 /* Login button styling */
 .login-button {
-    background-color: #8bc34a; /* Green button */
+    background-color: green; /* Green button */
     color: white;
     padding: 15px 25px; /* Larger padding for a bigger button */
     border: none;
@@ -123,7 +123,7 @@
 
 /* Hover effect for login button */
 .login-button:hover {
-    background-color: #689f38; 
+    background-color: green; 
 }
 
 /* Terms & conditions text at the bottom */
@@ -136,7 +136,7 @@
 
 /* Link styling for terms */
 .terms-text a {
-    color: #8bc34a;
+    color: green;
     text-decoration: none;
 }
 
@@ -190,6 +190,7 @@
 
   .logo {
     font-size: 1.8em;
+    color: green;
   }
 
   .form-section h2 {
@@ -201,7 +202,7 @@
   }
 
   .signup-button, .login-button {
-    width: 85%; /* Make buttons wider on smaller screens */
+    width: 70%; 
     font-size: 1.1em;
   }
 

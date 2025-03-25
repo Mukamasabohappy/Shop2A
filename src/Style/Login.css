@@ -1,12 +1,10 @@
-/* Style/CoffeeLogin.module.css */
-
 .loginContainer {
     display: flex;
     width: 100%;
     min-height: 100vh;
     overflow: hidden;
-    font-family: 'Roboto', sans-serif; /* A slightly less common font */
-    background: #f0f4c3;  /* A unique light background color */
+    font-family: 'Roboto', sans-serif; 
+    background: #f0f4c3;  
 }
 
 .formSection {
@@ -19,7 +17,7 @@
     background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;  /* More rounded corners */
-    margin: 20px;  /* Add some margin around the form */
+    margin: 100px;  /* Add some margin around the form */
 }
 
 .logo {
@@ -125,7 +123,7 @@
 }
 
 .signupButton {
-    background-color: #2e7d32; /* Dark green signup button */
+    background-color: green; /* Dark green signup button */
     color: white;
     padding: 16px 24px;
     border: none;
