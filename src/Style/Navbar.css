@@ -21,7 +21,8 @@
   display: flex;
   gap: 50px;
   justify-content: space-around;
-  padding-left: 200px;
+  
+  padding-right: 200px;
 }
 
 .nav-links li {
