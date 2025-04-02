@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../dahboard/DashStyle/Orders.css';
+import '../Dahboard/DashStyle/Orders.css';
 
 const API_URL = 'http://localhost:5000/api/orders';
 
