@@ -4,7 +4,7 @@
   background: black;
   color: white;
   padding: 15px 20px;
-  width: 2500px;
+  width: 2700px;
   padding-right: 20rem;
   justify-content: space-between;
 }
@@ -19,7 +19,7 @@
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 50px;
+  gap: 20px;
   justify-content: space-around;
   
   padding-right: 300px;
