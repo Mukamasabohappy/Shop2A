@@ -13,6 +13,126 @@
   overflow-y: hidden; /* Remove vertical scrolling */
   padding-left: 20rem;
 }
+/* Increase the width of both Add and Update tables/forms */
+.large-table {
+  width: 95%; /* Increase the table width further */
+  margin: 20px auto;
+  table-layout: fixed;
+}
+
+.large-form {
+  width: 95%; /* Make form width larger */
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Darker background for the modal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 60px;
+  border-radius: 10px;
+  width: 90%; /* Modal takes up 90% width */
+  max-width: 1200px; /* Increase max-width of the modal */
+  margin: auto;
+}
+
+.form-input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-button {
+  width: 100%;
+  padding: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: white;
+  padding: 40px; /* Increased padding for more space inside the modal */
+  border-radius: 10px; /* Slightly rounded corners */
+  width: 600px; /* Larger width for bigger modal */
+  max-width: 90%;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Added shadow for better visibility */
+  font-size: 18px; /* Increased font size for better readability */
+}
+
+/* Form inputs */
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+  width: 100%; /* Ensure inputs fill the modal width */
+  padding: 12px; /* Increased padding for better spacing */
+  margin: 10px 0; /* Added margin for spacing between inputs */
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* Add Item button */
+.add-item-button {
+  padding: 15px 30px; /* Larger padding for bigger button */
+  background-color: #28a745;
+  color: white;
+  font-size: 18px; /* Increased font size */
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.add-item-button:hover {
+  background-color: #218838;
+}
+
+/* Close button */
+.modal-content button.close {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.modal-content button.close:hover {
+  background-color: #c82333;
+}
 
 /* Inventory Form */
 .inventory-form {

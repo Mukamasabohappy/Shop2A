@@ -8,7 +8,7 @@ const Sidebar = () => {
             {/* Sidebar Logo */}
             <div className="sidebar-logo">
                 <NavLink to="/">
-                    <img src="/path-to-your-logo.png" alt="Shop Logo" className="logo" />
+                    <img src="/path-to-your-logo.png" alt="Shop Logo" className="SHOP" />
                 </NavLink>
             </div>
 

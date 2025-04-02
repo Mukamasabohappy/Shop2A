@@ -5,7 +5,7 @@ const mensClothingData = [
   {
     id: 1,
     name: 'Slim Fit Linen Shirt',
-    price: 49.99,
+    price: 49,
     imageUrl: 'https://saintperry.com/cdn/shop/files/slim-fit-linen-shirt-325309.jpg?v=1716519032',
     description: 'Lightweight and breathable.',
     sizes: ['S', 'M', 'L', 'XL'],
@@ -13,7 +13,7 @@ const mensClothingData = [
     {
     id: 2,
     name: 'Modern Chino Shorts',
-    price: 39.50,
+    price: 40,
     imageUrl: 'https://bearbottomclothing.com/cdn/shop/files/StretchChinoShort4Pack_954efd33-5621-4ca6-b70e-d9402e9c8999.png?v=1731354124&width=1080',
     description: 'Versatile shorts for a casual look.',
     sizes: ['30', '32', '34', '36'],
@@ -21,7 +21,7 @@ const mensClothingData = [
     {
     id: 3,
     name: ' T-Shirt',
-    price: 34.99,
+    price: 35,
     imageUrl: 'https://i.ebayimg.com/00/s/MTYwMFgxMzA4/z/s5MAAOSw3lRcx4qC/$_57.JPG?set_id=8800005007',
     description: 'Classic black and white striped t-shirt. Great for pirate, mime, or retro costumes.',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -29,7 +29,7 @@ const mensClothingData = [
     {
     id: 4,
     name: 'Premium Wool Blazer',
-    price: 199.99,
+    price: 30,
     imageUrl: 'https://cdn.shopify.com/s/files/1/0612/5597/5081/files/2_c59d7d63-a6e3-4d65-8feb-7c61b100e89c.jpg?v=1661875846',
     description: 'Timeless blazer adds class to outfit.',
     sizes: ['38R', '40R', '42R', '44R'],
@@ -37,7 +37,7 @@ const mensClothingData = [
     {
     id: 5,
     name: 'Classic Crew Neck Sweater',
-    price: 59.00,
+    price: 50,
     imageUrl: 'https://gardenheir.com/cdn/shop/files/Cashmere-Crew-All-3.jpg?v=1729890256&width=1946',
     description: 'Versatile sweater for layering.',
     sizes: ['S', 'M', 'L', 'XL'],
@@ -45,7 +45,7 @@ const mensClothingData = [
     {
     id: 6,
     name: 'Dark Wash Jeans',
-    price: 79.00,
+    price: 60,
     imageUrl: 'https://cdn-kdcfl.nitrocdn.com/QrdYURphyxnwJnTyRvoUEFhezMXyKSqk/assets/images/optimized/rev-a4b8d72/www.themodestman.com/wp-content/uploads/2021/02/Dark-wash-jeans-formality.jpg',
     description: 'Versatile jeans for everyday wear.',
     sizes: ['30', '32', '34', '36'],
@@ -53,7 +53,7 @@ const mensClothingData = [
     {
     id: 7,
     name: 'Leather Motorcycle Jacket',
-    price: 279.00,
+    price: 70,
     imageUrl: 'https://cdn.hiconsumption.com/wp-content/uploads/2024/04/Best-Motorcycle-Jackets-Tested.jpg',
     description: 'A classic and edgy leather motorcycle jacket. A timeless piece for any wardrobe.',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -69,7 +69,7 @@ const mensClothingData = [
     {
     id: 9,
     name: 'Camo Cargo Pants',
-    price: 69.50,
+    price: 65,
     imageUrl: 'https://t3.ftcdn.net/jpg/05/71/53/32/360_F_571533216_ISrKbXi2zDObXZEansYyvkE3kQsgkyyD.jpg',
     description: 'Durable camo cargo pants.  Ideal for military, survivalist, or adventurer costumes.',
     sizes: ['30', '32', '34', '36', '38'],
@@ -398,4 +398,132 @@ const MensClothing = () => {
   );
 };
 
+
 export default MensClothing;
+// import React, { useState, useEffect } from 'react';
+
+// const MensClothing = () => {
+//   const [clothingItems, setClothingItems] = useState([]);
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   const [cart, setCart] = useState([]); // State to hold items in the cart
+
+//   // Fetch clothing items from backend
+//   useEffect(() => {
+//     fetch('http://localhost:5000/api/clothes/all')
+//       .then((response) => response.json())
+//       .then((data) => {
+//         const menClothingItems = data.filter((item) => item.category === 'Men');
+//         setClothingItems(menClothingItems);
+//         setIsLoading(false);
+//       })
+//       .catch((err) => {
+//         setError('Failed to load data');
+//         setIsLoading(false);
+//       });
+//   }, []);
+
+//   // Handle adding item to cart
+//   const handleAddToCart = (item) => {
+//     setCart((prevCart) => {
+//       const itemIndex = prevCart.findIndex((cartItem) => cartItem.id === item.id);
+//       if (itemIndex === -1) {
+//         return [...prevCart, { ...item, quantity: 1 }];
+//       } else {
+//         const updatedCart = [...prevCart];
+//         updatedCart[itemIndex].quantity += 1;
+//         return updatedCart;
+//       }
+//     });
+//   };
+
+//   // Handle placing an order (simple log for now)
+//   const handlePlaceOrder = () => {
+//     if (cart.length === 0) {
+//       alert('Your cart is empty!');
+//       return;
+//     }
+
+//     // Send the cart data to the backend (e.g., POST request to create an order)
+//     fetch('http://localhost:5000/api/orders', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ items: cart }),
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         alert('Order placed successfully!');
+//         setCart([]); // Clear the cart after placing the order
+//       })
+//       .catch((err) => {
+//         alert('Failed to place order');
+//       });
+//   };
+
+//   // Handle loading and error states
+//   if (isLoading) {
+//     return <div>Loading Men's Clothing...</div>;
+//   }
+
+//   if (error) {
+//     return <div>Error: {error}</div>;
+//   }
+
+//   return (
+//     <div className="mens-clothing-container">
+//       <h1>Men's Clothing</h1>
+//       <div className="clothing-grid">
+//         {clothingItems.length > 0 ? (
+//           clothingItems.map((item) => (
+//             <div key={item.id} className="clothing-card">
+//               <div className="image-container">
+//                 <img src={item.imageUrl} alt={item.name} />
+//               </div>
+//               <h2>{item.name}</h2>
+//               <p className="price">${item.price.toFixed(2)}</p>
+//               <p className="description">{item.description}</p>
+//               <div className="size-options">
+//                 {item.sizes && item.sizes.map((size) => (
+//                   <button key={size} className="size-button">
+//                     {size}
+//                   </button>
+//                 ))}
+//               </div>
+//               <button className="add-to-cart-button" onClick={() => handleAddToCart(item)}>
+//                 Add to Cart
+//               </button>
+//             </div>
+//           ))
+//         ) : (
+//           <p>No men's clothing items available.</p>
+//         )}
+//       </div>
+
+//       {/* Display Cart */}
+//       <div className="cart">
+//         <h2>Shopping Cart</h2>
+//         {cart.length === 0 ? (
+//           <p>Your cart is empty</p>
+//         ) : (
+//           <div>
+//             <ul>
+//               {cart.map((item, index) => (
+//                 <li key={index}>
+//                   {item.name} x {item.quantity} - ${item.price * item.quantity}
+//                 </li>
+//               ))}
+//             </ul>
+//             <p>Total: ${cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2)}</p>
+//             <button className="place-order-button" onClick={handlePlaceOrder}>
+//               Place Order
+//             </button>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default MensClothing;

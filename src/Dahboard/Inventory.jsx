@@ -3,229 +3,174 @@ import "../Dahboard/DashStyle/Inventory.css";
 
 function Inventory() {
   const [inventory, setInventory] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [newItem, setNewItem] = useState({ name: "", description: "", price: "" });
+  const [newItem, setNewItem] = useState({ name: "", description: "", price: "", category: "", photo: "" });
   const [updateItem, setUpdateItem] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [addModalVisible, setAddModalVisible] = useState(false); 
 
-  // Fetch inventory on component mount
   useEffect(() => {
     fetchInventory();
   }, []);
 
+  
   const fetchInventory = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/clothes/all");
-      if (!response.ok) throw new Error("Failed to fetch inventory");
       const data = await response.json();
       setInventory(data);
     } catch (error) {
-      console.error("Error fetching inventory:", error);
+      alert("Error fetching inventory: " + error.message);
     }
   };
 
-  // Add New Item (Optimistic UI Update)
+  
+  const handleInputChange = (event, setter) => {
+    const { name, value } = event.target;
+    setter((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Add a new item
   const handleAddItem = async (event) => {
-    event.preventDefault();  // Prevent form from submitting and refreshing page
-
-    if (!newItem.name || !newItem.price) {
-      alert("Name and price are required!");
-      return;
-    }
-
-    // Optimistic Update: add item immediately to UI before sending request
-    const tempItem = { ...newItem, _id: Date.now() }; // fake _id for the item
-    setInventory((prevInventory) => [...prevInventory, tempItem]);
+    event.preventDefault();
+    const itemToAdd = {
+      ...newItem,
+      price: newItem.price ? parseFloat(newItem.price) : 0,
+      category: newItem.category.charAt(0).toUpperCase() + newItem.category.slice(1).toLowerCase(),
+    };
 
     try {
       const response = await fetch("http://localhost:5000/api/clothes/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newItem),
+        body: JSON.stringify(itemToAdd),
       });
 
-      if (!response.ok) throw new Error("Failed to add item");
-
-      const addedItem = await response.json();
-      setInventory((prevInventory) =>
-        prevInventory.map((item) => (item._id === tempItem._id ? addedItem : item))
-      );
-      setNewItem({ name: "", description: "", price: "" });
+      if (response.ok) {
+        fetchInventory();
+        setNewItem({ name: "", description: "", price: "", category: "", photo: "" });
+        setAddModalVisible(false); 
+      } else {
+        alert("Failed to add item");
+      }
     } catch (error) {
-      console.error("Error adding item:", error);
-      // Optionally, remove the item from UI if add fails
-      setInventory((prevInventory) => prevInventory.filter((item) => item._id !== tempItem._id));
+      alert("Error adding item: " + error.message);
     }
   };
 
-  // Delete Item (Optimistic UI Update)
-  const handleDeleteItem = async (id) => {
-    // Optimistic Update: remove item from UI immediately
-    setInventory((prevInventory) => prevInventory.filter((item) => item._id !== id));
-
-    try {
-      const response = await fetch(`http://localhost:5000/api/clothes/delete/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) throw new Error("Failed to delete item");
-    } catch (error) {
-      console.error("Error deleting item:", error);
-      // Optionally, re-add the deleted item to UI if delete fails
-      fetchInventory(); // Re-fetch the entire inventory if deletion fails
-    }
-  };
-
-  // Update Item (Optimistic UI Update)
+  // Update an existing item
   const handleUpdateItem = async (event) => {
     event.preventDefault();
-
-    if (!updateItem.name || !updateItem.price) {
-      alert("Name and price are required!");
-      return;
-    }
-
-    // Optimistic Update: immediately update the item in UI
-    setInventory((prevInventory) =>
-      prevInventory.map((item) =>
-        item._id === updateItem._id ? { ...item, ...updateItem } : item
-      )
-    );
-
     try {
       const response = await fetch(`http://localhost:5000/api/clothes/update/${updateItem._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updateItem),
       });
-
-      if (!response.ok) throw new Error("Failed to update item");
-
-      const updatedItem = await response.json();
-      setInventory((prevInventory) =>
-        prevInventory.map((item) => (item._id === updatedItem._id ? updatedItem : item))
-      );
-      setUpdateItem(null);
+      if (response.ok) {
+        fetchInventory();
+        setModalVisible(false);
+      } else {
+        alert("Failed to update item");
+      }
     } catch (error) {
-      console.error("Error updating item:", error);
-      // Optionally, re-fetch inventory if update fails
-      fetchInventory();
+      alert("Error updating item: " + error.message);
     }
   };
 
-  // Filter inventory for search functionality
-  const filteredInventory = inventory.filter(
-    (item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Delete an item
+  const handleDeleteItem = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/clothes/delete/${id}`, { method: "DELETE" });
+      if (response.ok) fetchInventory();
+      else alert("Failed to delete item");
+    } catch (error) {
+      alert("Error deleting item: " + error.message);
+    }
+  };
 
   return (
     <div className="inventory-container">
       <h2>Inventory</h2>
 
-      {/* Search Bar */}
-      <div className="inventory-toolbar">
-        <input
-          type="text"
-          placeholder="Search inventory..."
-          className="inventory-search"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
+      {/* Add Item Button */}
+      <button onClick={() => setAddModalVisible(true)} className="add-item-button">Add New Item</button>
 
-      {/* Inventory Table */}
-      <div className="inventory-table-container">
+      <div className="large-table">
         <table className="inventory-table">
           <thead>
             <tr>
               <th>Name</th>
               <th>Description</th>
               <th>Price</th>
+              <th>Category</th>
+              <th>Photo</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {filteredInventory.length > 0 ? (
-              filteredInventory.map((item) => (
-                <tr key={item._id}>
-                  <td>{item.name}</td>
-                  <td>{item.description}</td>
-                  <td>${item.price}</td>
-                  <td>
-                    <button
-                      className="inventory-edit-button"
-                      onClick={() => setUpdateItem(item)}
-                    >
-                      Update
-                    </button>
-                    <button
-                      className="inventory-delete-button"
-                      onClick={() => handleDeleteItem(item._id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="4">No items found</td>
+            {inventory.map((item) => (
+              <tr key={item._id}>
+                <td>{item.name}</td>
+                <td>{item.description}</td>
+                <td>${item.price}</td>
+                <td>{item.category}</td>
+                <td><img src={item.photo} alt={item.name} width="50" height="50" /></td>
+                <td>
+                  <button onClick={() => { setUpdateItem(item); setModalVisible(true); }}>Update</button>
+                  <button onClick={() => handleDeleteItem(item._id)}>Delete</button>
+                </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
       </div>
 
-      {/* Add New Item Form */}
-      <form className="inventory-form" onSubmit={handleAddItem}>
-        <h3>Add New Item</h3>
-        <input
-          type="text"
-          placeholder="Name"
-          value={newItem.name}
-          onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          value={newItem.description}
-          onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          value={newItem.price}
-          onChange={(e) => setNewItem({ ...newItem, price: e.target.value })}
-        />
-        <button className="inventory-add-button" type="submit">
-          Add
-        </button>
-      </form>
+      {/* Add New Item Modal */}
+      {addModalVisible && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Add New Item</h3>
+            <form onSubmit={handleAddItem}>
+              {Object.keys(newItem).map((key) => (
+                <input
+                  key={key}
+                  type={key === "price" ? "number" : "text"}
+                  name={key}
+                  placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+                  value={newItem[key]}
+                  onChange={(e) => handleInputChange(e, setNewItem)}
+                  required
+                />
+              ))}
+              <button type="submit">Add Item</button>
+            </form>
+            <button onClick={() => setAddModalVisible(false)}>Close</button>
+          </div>
+        </div>
+      )}
 
-      {/* Update Item Form */}
-      {updateItem && (
-        <form className="inventory-form" onSubmit={handleUpdateItem}>
-          <h3>Update Item</h3>
-          <input
-            type="text"
-            value={updateItem.name}
-            onChange={(e) => setUpdateItem({ ...updateItem, name: e.target.value })}
-          />
-          <input
-            type="text"
-            value={updateItem.description}
-            onChange={(e) => setUpdateItem({ ...updateItem, description: e.target.value })}
-          />
-          <input
-            type="number"
-            value={updateItem.price}
-            onChange={(e) => setUpdateItem({ ...updateItem, price: e.target.value })}
-          />
-          <button className="inventory-add-button" type="submit">
-            Update
-          </button>
-        </form>
+      {/* Update Item Modal */}
+      {modalVisible && updateItem && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Update Item</h3>
+            <form onSubmit={handleUpdateItem}>
+              {Object.keys(updateItem).map((key) => (
+                <input
+                  key={key}
+                  type={key === "price" ? "number" : "text"}
+                  name={key}
+                  placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
+                  value={updateItem[key]}
+                  onChange={(e) => handleInputChange(e, setUpdateItem)}
+                  required
+                />
+              ))}
+              <button type="submit">Update Item</button>
+            </form>
+            <button onClick={() => setModalVisible(false)}>Close</button>
+          </div>
+        </div>
       )}
     </div>
   );

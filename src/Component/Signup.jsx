@@ -25,11 +25,11 @@ const CoffeeLogin = () => {
             );
 
             console.log("Registration successful", response.data);
-            setSuccessMessage("Account created successfully! Redirecting to dashboard...");
+            setSuccessMessage("Account created successfully! Redirecting to login...");
 
-            // Redirect to dashboard after a short delay
+            // Redirect to login page after a short delay
             setTimeout(() => {
-                navigate('/dashboard'); // Redirect to Dashboard
+                navigate('/login'); // Redirect to Login Page
             }, 2000);
 
         } catch (error) {

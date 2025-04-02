@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../dahboard/DashStyle/Orders.css';
 
-const API_URL = 'http://localhost:5000/api/Orders';
+const API_URL = 'http://localhost:5000/api/orders';
 
 const OrdersList = () => {
   const [orders, setOrders] = useState([]);
@@ -12,11 +13,17 @@ const OrdersList = () => {
     fetchOrders();
   }, []);
 
+  // Fetch orders from the backend
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/orders`);
-      setOrders(response.data);
+      const token = localStorage.getItem('token'); // Get token from localStorage or cookie
+      const response = await axios.get(API_URL, {
+        headers: {
+          'Authorization': `Bearer ${token}`, // Attach token in Authorization header
+        },
+      });
+      setOrders(response.data); // Set fetched orders
       setLoading(false);
     } catch (err) {
       setError('Failed to fetch orders');
@@ -55,5 +62,3 @@ const OrdersList = () => {
 };
 
 export default OrdersList;
-
-

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate
-import axios from 'axios'; // Import axios
-import '../Style/Signup.css'; // Ensure correct path for CSS
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import '../Style/Signup.css';
 
 const CoffeeLogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState(''); // State for handling errors
-    const navigate = useNavigate(); // Initialize navigate
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -20,15 +20,15 @@ const CoffeeLogin = () => {
                 { headers: { "Content-Type": "application/json" } }
             );
 
+            const { token } = response.data; // Extract token from response
+
             // Save token to local storage
-            localStorage.setItem("token", response.data.token);
-            console.log("Login successful", response.data);
+            localStorage.setItem("token", token);
 
             // Redirect to dashboard
             navigate("/dashboard");
-
+        
         } catch (error) {
-            // Handle login error
             setErrorMessage(error.response?.data?.error || "Login failed");
         }
     };
@@ -40,9 +40,9 @@ const CoffeeLogin = () => {
                 <h2>Welcome Back!</h2>
                 <p>Please log in to continue.</p>
 
-                {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Error message display */}
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-                <form onSubmit={handleLogin}> {/* Use handleLogin function */}
+                <form onSubmit={handleLogin}>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input
@@ -77,10 +77,7 @@ const CoffeeLogin = () => {
                 </div>
 
                 <div className="signup-section">
-                    <p>Don't have an account?      <Link to="/signup">
-                        Sign Up
-                    </Link></p>
-                    
+                    <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
                 </div>
             </div>
 

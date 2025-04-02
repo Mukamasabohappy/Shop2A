@@ -5,7 +5,7 @@ const womensClothingData = [
   {
     id: 1,
     name: 'Floral Print Dress',
-    price: 59.99,
+    price: 59,
     imageUrl: 'https://shop.mango.com/assets/rcs/pics/static/T8/fotos/S/87054094_99_B.jpg?imwidth=2048&imdensity=1&ts=1734955503851',
     description: 'Elegant floral dress for any occasion.',
     sizes: ['XS', 'S', 'M', 'L'],
@@ -21,7 +21,7 @@ const womensClothingData = [
   {
     id: 3,
     name: 'Striped T-Shirt',
-    price: 24.99,
+    price: 24,
     imageUrl: 'https://i5.walmartimages.com/seo/Female-T-shirt-Classic-Striped-T-shirt-O-Neck-T-shirt-Long-Sleeve-T-shirt-Loose-Casual-T-Shirt-Wild-Base-Top_bfb617dd-15d2-4cba-8d38-5b74faea0982.36991dcfb7e413eff36ba89bbabaf0d0.jpeg',
     description: 'Classic striped t-shirt for a casual look.',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
